@@ -17,6 +17,7 @@ function beerMe(){
     $curlies.append('text').classed('left curly',true).text('{').attr('x',-100);
     $curlies.append('text').classed('right curly',true).text('}').attr('x',150);
     mug.renderInto($g);
+    document.title='beer&code';
   }
 
   function BeerMug(opt){
@@ -96,9 +97,7 @@ function beerMe(){
 
   }
                                                     
-  BeerMug.defaultChars = _.reject(_.range(33,126).map(function(n){return String.fromCharCode(n)}), function(c){
-    return _(['_',':',';',"'",'"','.',',','-','`','*']).contains(c);
-  });
+  BeerMug.defaultChars = _.range(33,126).map(function(n){return String.fromCharCode(n)});
 
   BeerMug.prototype.renderInto = function($svg){
       $svg.selectAll('text').data(this.grid,function(d){
