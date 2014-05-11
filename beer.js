@@ -79,6 +79,7 @@ function beerMe(){
             x: _.sample(glassOnTop),
             y: self.foamHeight,
             clobber: true, 
+            width: 3,
             speed: -2,
             length: -20
         });
@@ -116,10 +117,11 @@ function beerMe(){
 
   BeerMug.prototype.getCharsNear = function(bubble){
     if(!length) length = 5;
+    var width = (bubble.width || 1)/2;
     var gg = this.grid.filter(function(c){
       var d = bubble.distTo(c);
-      return d>=0 && d<1 && Math.abs(bubble.x-c.x)<0.5;
-      return Math.abs(c.x-x)<0.5 && (c.y-y)<length && (c.y-y)>0;
+      return d>=0 && d<1 && Math.abs(bubble.x-c.x)<width;
+      return Math.abs(c.x-x)<width && (c.y-y)<length && (c.y-y)>0;
     });
     return gg;
   }
@@ -190,6 +192,7 @@ function beerMe(){
     this.mug = mug;
     this.x = opt.x || _.random(mug.wallWidth,mug.width-mug.wallWidth-1, true);
     this.y = opt.y || mug.height;
+    this.width = opt.width || 1;
     this.length = opt.length || 5;
     this.speed = opt.speed || Math.random()*0.5+0.1;
     this.clobber = opt.clobber;
